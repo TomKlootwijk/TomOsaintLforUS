@@ -1,0 +1,133 @@
+SML.di(`./UMExCS6_2k.js`,import.meta.url,`UMExCS6_2k`),SML.di(`./C7C5MjAIvC.js`,import.meta.url,`C7C5MjAIvC`),SML.di(`./2qKR8_zJMJ.js`,import.meta.url,`2qKR8_zJMJ`),SML.di(`./DRzBMpMUOo.js`,import.meta.url,`DRzBMpMUOo`),SML.di(`./Db2wlZFQI7.js`,import.meta.url,`Db2wlZFQI7`),SML.di(`./D3fFTbM6cz.js`,import.meta.url,`D3fFTbM6cz`),SML.di(`./Dst3VSteNd.js`,import.meta.url,`Dst3VSteNd`),SML.dm(`9LlPbtePbf`,[`UMExCS6_2k`,`C7C5MjAIvC`,`2qKR8_zJMJ`,`DRzBMpMUOo`,`Db2wlZFQI7`,`D3fFTbM6cz`,`Dst3VSteNd`],async(e,t,n,r,i)=>{let a={COMMENT:`comment`,POST:`post`},o=class extends t.s{constructor(){super(...arguments),this.translationContextValue=e.aG,this.showTranslationModal=()=>{this.translationModal.showModal()},this.hideTranslationModal=()=>{this.translationModal.close()},this.isCommentModal=()=>this.modalType===a.COMMENT,this.saveCommentTranslationModalSetting=()=>{if(this.hideTranslationCheckbox.checked){let t=this.translationContextValue;this.isCommentModal()?(t.showCommentTranslationModal=!1,e.d(this,i.g())):(t.showPostTranslationModal=!1,e.d(this,i.h()));let n=new CustomEvent(`update-translation-context`,{bubbles:!0,composed:!0,detail:t});this.dispatchEvent(n)}},this.modalRefuseClick=e=>{e.preventDefault(),e.stopPropagation(),this.saveCommentTranslationModalSetting(),this.hideTranslationModal(),this.handleTranslationRefuseClick()},this.modalConfirmClick=e=>{e.preventDefault(),e.stopPropagation(),this.saveCommentTranslationModalSetting(),this.hideTranslationModal(),this.handleTranslationConfirmClick()},this.renderTitleText=()=>t.x` ${this.isCommentModal()?`Je opmerking vertalen`:`Je post vertalen`} `,this.renderBodyText=()=>t.x` ${this.isCommentModal()?`Gebruikers begrijpen je opmerking mogelijk niet zonder een vertaling. Wil je je opmerking vertalen voordat je die plaatst?`:`Gebruikers begrijpen je post mogelijk niet zonder een vertaling. Wil je je post vertalen?`} `,this.renderButtonText=()=>t.x` ${this.isCommentModal()?`Opmerking vertalen`:`Post vertalen`} `,this.renderCheckBoxText=()=>t.x` ${this.isCommentModal()?`Vraag niet nogmaals om mijn opmerkingen te vertalen.`:`Vraag niet nogmaals om mijn post te vertalen.`} `}render(){return t.x` <faceplate-modal id="contribution-translation-modal" class="min-h-[auto]"> <div slot="title">${this.renderTitleText()}</div> <div slot="closeButton"> ${n.b({appearance:`secondary`,leadingIcon:r.c({size:t.I.Small}),size:n._.Small,attributes:{"aria-label":`Annuleren`,onclick:this.hideTranslationModal}})} </div> <div class="mb-0 w-[350px]"> <p class="mt-md text-14 leading-5 text-neutral-content" data-testid="translation-modal-body"> ${this.renderBodyText()} </p> <div> <faceplate-checkbox-input id="comment-translation-hide-checkbox" class="pt-xs text-14 leading-5 text-neutral-content"> ${this.renderCheckBoxText()} </faceplate-checkbox-input> </div> <div class="mt-lg flex gap-xs"> ${n.b({size:n._.Medium,appearance:`secondary`,children:`Vertaling afwijzen`,attributes:{className:`w-1/2`,onclick:this.modalRefuseClick,"data-testid":`translation-refuse-button`}})} ${n.b({size:n._.Medium,appearance:`primary`,children:this.renderButtonText(),attributes:{className:`w-1/2`,onclick:this.modalConfirmClick,"data-testid":`translation-confirm-button`}})} </div> </div> </faceplate-modal> `}};o.styles=[e.t],e._([e.n({type:Object})],o.prototype,`handleTranslationConfirmClick`,void 0),e._([e.n({type:Object})],o.prototype,`handleTranslationRefuseClick`,void 0),e._([e.n({type:String,attribute:`modal-type`})],o.prototype,`modalType`,void 0),e._([e.aE({context:e.aF,subscribe:!0}),e.f()],o.prototype,`translationContextValue`,void 0),e._([e.k(`faceplate-checkbox-input#comment-translation-hide-checkbox`)],o.prototype,`hideTranslationCheckbox`,void 0),e._([e.k(`faceplate-modal#contribution-translation-modal`,!0)],o.prototype,`translationModal`,void 0),o=e._([e.e(`translation-contribution-modal`)],o);var s;(function(e){e.PostSubmit=`post_submit`,e.CommentSubmit=`comment_submit`})(s||(s={}));async function c(e){let t=document.querySelector(`reputation-recaptcha`);if(!t)throw Error(`Unable to find reputation-recaptcha component`);return await t.getToken(e)}let l=async()=>{let e=document.querySelector(`reputation-recaptcha`);if(!e)throw Error(`Unable to find reputation-recaptcha component`);await e.preload?.()};async function u(e,t){e.value=await c(t)}var d;(function(e){e.ServerError=`server-error`,e.ValidationError=`validation-error`,e.AutomationError=`automation-error`})(d||(d={}));var f;(function(e){e.OperationError=`operation-error`,e.ValidationError=`validation-error`,e.ClientError=`client-error`,e.ServerError=`server-error`})(f||(f={}));class p{constructor(){this._eventList=[],this._totalAdditions=0,this._totalRemovals=0,this.handleEvent=e=>{if(e.isComposing)return;let t=e.key===`Backspace`||e.key===`Delete`,n=!t&&this.isTextInsertion(e),r=t?`remove`:!t&&!n?`other`:`add`;t?this._totalRemovals++:n&&this._totalAdditions++;let i=e.target,a=i instanceof Element?i.getAttribute(`name`)??void 0:void 0;this.addEvent({clientTimestamp:this.getTimestamp(),inputType:r,inputField:a})},this.flush=(t,n,r)=>{if(this._eventList.length===0){this.reset();return}let i=e.C({source:n,action:`type`,noun:`form`},{input_events:this.serialize(),...r});e.d(t,i),this.reset()},this.serializeState=()=>({eventList:[...this._eventList],totalAdditions:this._totalAdditions,totalRemovals:this._totalRemovals}),this.restore=e=>{this._eventList=[...e.eventList],this._totalAdditions=e.totalAdditions,this._totalRemovals=e.totalRemovals},this.reset=()=>{this._eventList=[],this._totalAdditions=0,this._totalRemovals=0}}get eventList(){return this._eventList}get totalAdditions(){return this._totalAdditions}get totalRemovals(){return this._totalRemovals}getTimestamp(){return new Date().getTime()}addEvent(e){this._eventList.length>=1e3&&this._eventList.shift(),this._eventList.push(e)}isTextInsertion(e){return e.metaKey||e.ctrlKey?!1:e.key.length===1||e.key===`Enter`}serialize(){return{client_timestamps:this._eventList.map(e=>e.clientTimestamp),input_types:this._eventList.map(e=>e.inputType),input_fields:this._eventList.map(e=>e.inputField??``),total_additions:this._totalAdditions,total_removals:this._totalRemovals}}}class m{constructor(){this.pasteEventList=[],this.maxPastedCharsLen=0,this.openClientTimestamp=0,this.openMousePosition={x:-1,y:-1},this.currMousePosition={x:-1,y:-1},this.getOpenClientTimestamp=()=>this.openClientTimestamp,this.getOpenMousePosition=()=>this.openMousePosition,this.getCurrMousePosition=()=>this.currMousePosition,this.getMaxPastedCharsLen=()=>this.maxPastedCharsLen,this.getPasteEvents=()=>this.pasteEventList,this.setOpenMousePosition=()=>{this.openMousePosition=this.currMousePosition},this.setOpenClientTimestamp=()=>{this.openClientTimestamp=this.getTimestamp()},this.handlePasteEvent=(e,t,n)=>{if(this.pasteEventList.length<100){let r=e.clipboardData?.getData(`text/plain`)||``,i=e.clipboardData?.types?.join(`,`)||``,a=r.replace(/\r\n|\r|\n/g,``),o=this.getTimestamp();a.length>this.maxPastedCharsLen&&(this.maxPastedCharsLen=a.length),setTimeout(()=>{let e=t instanceof HTMLTextAreaElement||t instanceof HTMLInputElement?t.value.length||0:t?.innerText?.length||0;this.pasteEventList.push({clientTimestamp:o,charsPastedLen:a.length,mousePosition:this.currMousePosition,maxPastedCharsLen:this.maxPastedCharsLen,totalTextLen:e,inputField:n??t?.name,contentType:i})},0)}},this.handleMouseMove=e.H(e=>{this.currMousePosition={x:e.clientX,y:e.clientY}},50),this.handleTouchStart=e=>{let t=e.changedTouches;t[0].screenX&&t[0].screenY&&(this.currMousePosition={x:Math.round(t[0].screenX),y:Math.round(t[0].screenY)})},this.dispatchV2PasteEvents=(t,n,r)=>{for(let i of this.pasteEventList)e.d(t,e.C({source:n,noun:`text`,action:`paste`},{action_info:{paste_client_timestamp:i.clientTimestamp,total_text_length:i.totalTextLen,characters_pasted_length:i.charsPastedLen,max_pasted_characters_length:i.maxPastedCharsLen,curr_mouse_position_x:i.mousePosition.x,curr_mouse_position_y:i.mousePosition.y,content_type:i.contentType,input_field:i.inputField},...r}))},this.serialize=()=>({pasteEventList:[...this.pasteEventList],maxPastedCharsLen:this.maxPastedCharsLen,openClientTimestamp:this.openClientTimestamp,openMousePosition:{...this.openMousePosition},currMousePosition:{...this.currMousePosition}}),this.restore=e=>{this.pasteEventList=[...e.pasteEventList],this.maxPastedCharsLen=e.maxPastedCharsLen,this.openClientTimestamp=e.openClientTimestamp,this.openMousePosition={...e.openMousePosition},this.currMousePosition={...e.currMousePosition}},this.reset=()=>{this.pasteEventList=[],this.maxPastedCharsLen=0,this.currMousePosition={x:-1,y:-1}}}getTimestamp(){return new Date().getTime()}}return Object.defineProperty({get A(){return f},C:`create-post-start`,F:`FORBIDDEN`,I:p,M:a,N:`NOT_AUTHENTICATED`,P:m,R:2e3,get a(){return d},get b(){return s},c:`data-create-comment-error-category`,d:`data-action-info-error-codes`,e:`RATE_LIMITED`,p:l,s:u},Symbol.toStringTag,{value:`Module`})});
+
+/* @sml-chunk */
+SML.di(`./UMExCS6_2k.js`,import.meta.url,`UMExCS6_2k`),SML.di(`./DT5sJYIo0O.js`,import.meta.url,`DT5sJYIo0O`),SML.di(`./C7C5MjAIvC.js`,import.meta.url,`C7C5MjAIvC`),SML.dm(`BXWuIbgb-d`,[`UMExCS6_2k`,`DT5sJYIo0O`,`C7C5MjAIvC`],async(e,t,n)=>{let r=class extends n.s{constructor(){super(...arguments),this.url=``,this.toastMessage=``,this.isDesktopViewport=!1,this._copyUrl=async()=>{if(!this.url)return;let n={url:this.url};if(t.S.Clipboard===await t.s(n,this.isDesktopViewport)){let t=e.U(`faceplate-alert`,{level:e.af.success,message:this.toastMessage||`Link gekopieerd`});this.dispatchEvent(t)}}}handleClick(){this._copyUrl()}handleKeydown(e){(e.key===`Enter`||e.key===` `)&&(e.preventDefault(),this.handleClick())}render(){return n.x`<slot @click="${this.handleClick}" @keydown="${this.handleKeydown}"></slot>`}};return e._([e.n({type:String,attribute:`url`})],r.prototype,`url`,void 0),e._([e.n({type:String,attribute:`toast-message`})],r.prototype,`toastMessage`,void 0),e._([e.n({type:Boolean,attribute:`is-desktop-viewport`})],r.prototype,`isDesktopViewport`,void 0),r=e._([e.e(`copy-url`)],r),Object.defineProperty({get CopyUrl(){return r}},Symbol.toStringTag,{value:`Module`})});
+
+/* @sml-chunk */
+SML.di(`./UMExCS6_2k.js`,import.meta.url,`UMExCS6_2k`),SML.di(`./B5nsJ6Pn9V.js`,import.meta.url,`B5nsJ6Pn9V`),SML.di(`./CNmfC3S4cp.js`,import.meta.url,`CNmfC3S4cp`),SML.di(`./C7C5MjAIvC.js`,import.meta.url,`C7C5MjAIvC`),SML.dm(`CWa6JkB1z2`,[`UMExCS6_2k`,`B5nsJ6Pn9V`,`C7C5MjAIvC`,`CNmfC3S4cp`],async(e,t,n)=>{let r=e.G,i=class extends n.s{constructor(){super(...arguments),this.subredditId=``,this.isDismissed=!1,this.debouncedUpdateDismissedState=e.H(async()=>{if(this.subredditId)try{let e={subredditId:this.subredditId,isDismissed:this.isDismissed};await r({operation:t.O.UpdateAchievementCategorySuggestion,variables:e})}catch{}},500)}async handleClick(){this.isDismissed=!this.isDismissed,this.dispatchEvent(e.U(`mod-guidance-unit-toggle`,{newState:this.isDismissed?`closed`:`open`}));let t=this.closest(`.mod-guidance-unit`),n=t?.querySelector(`#mod-guidance-unit-content`);n&&n.classList.toggle(`hidden`,this.isDismissed);let r=t?.querySelector(`.collapsed-progress`);r&&r.classList.toggle(`hidden`,!this.isDismissed);let i=t?.querySelector(`.collapsed-text`),a=t?.querySelector(`.expanded-text`);i&&i.classList.toggle(`hidden`,!this.isDismissed),a&&a.classList.toggle(`hidden`,this.isDismissed);let o=this.querySelector(`#mod-guidance-header-up`),s=this.querySelector(`#mod-guidance-header-down`);o&&s&&(o.classList.toggle(`hidden`,this.isDismissed),s.classList.toggle(`hidden`,!this.isDismissed)),this.isDismissed&&e.d(this,e.C({source:`mod_guidance`,action:`collapse`,noun:`module`},{subreddit:{id:this.subredditId}})),this.debouncedUpdateDismissedState()}render(){return n.x`<slot @keypress="${this.handleClick}" @click="${this.handleClick}"></slot>`}};return e._([e.n({type:String,attribute:`subreddit-id`})],i.prototype,`subredditId`,void 0),e._([e.n({type:Boolean,attribute:`dismissed`,reflect:!0})],i.prototype,`isDismissed`,void 0),i=e._([e.e(`mod-guidance-unit-header`)],i),Object.defineProperty({get ModGuidanceUnitHeader(){return i}},Symbol.toStringTag,{value:`Module`})});
+
+/* @sml-chunk */
+SML.di(`./UMExCS6_2k.js`,import.meta.url,`UMExCS6_2k`),SML.di(`./2qKR8_zJMJ.js`,import.meta.url,`2qKR8_zJMJ`),SML.di(`./B5nsJ6Pn9V.js`,import.meta.url,`B5nsJ6Pn9V`),SML.di(`./CNmfC3S4cp.js`,import.meta.url,`CNmfC3S4cp`),SML.di(`./BGwyd1wXuR.js`,import.meta.url,`BGwyd1wXuR`),SML.di(`./C7C5MjAIvC.js`,import.meta.url,`C7C5MjAIvC`),SML.di(`./BpnkQrwd96.js`,import.meta.url,`BpnkQrwd96`),SML.dm(`CYV99TjKuw`,[`UMExCS6_2k`,`2qKR8_zJMJ`,`B5nsJ6Pn9V`,`BGwyd1wXuR`,`C7C5MjAIvC`,`CNmfC3S4cp`,`BpnkQrwd96`],async(e,t,n,r,i)=>{let a={HOVERCARD:`hovercard`,PROFILE:`profile`,COMMUNITY:`community`,OTHER_USER_PROFILE:`other-user`},o=i.x`,&nbsp;`,s={SUBREDDIT_NAME_ATTRIBUTE:`subreddit-name`,SUBREDDIT_NAME_CLASS:`.subreddit-name`,SUBREDDIT_ID_ATTRIBUTE:`subreddit-id`},c=class extends i.s{constructor(){super(...arguments),this.username=``,this.source=a.PROFILE,this.achievements=[],this.unlockCount=0,this.totalTrophies=0,this.shouldRenderEntrypoint=!0,this.loading=!1,this.subredditId=``,this.subredditName=``,this.isModalFeatureActivated=!1,this.pubsub=new e.P(this),this._activateFeature=async t=>e.s(t)}getAchievements(e){let t=[],n=[],r=e.filter(e=>e&&e.trophies.edges.length);for(let e of r)for(let r of e.trophies.edges){let e=r?.node;e&&(e.unlockedAt?t.push(e):n.push(e))}return t.concat(n)}setTrophyCounts(e){this.unlockCount=0,this.totalTrophies=0;for(let t of e)this.unlockCount+=+!!t.unlockedAt,this.totalTrophies++}extractAttributeData(e){let t=document.querySelectorAll(`[${e}]`);return t.length===0?null:t[0].getAttribute(e)}extractClassData(e){let t=document.querySelectorAll(e);if(t.length===0)return null;let n=t[0];return n?n.innerText:null}addSubredditPrefix(e){return e?/^r\//.test(e)?e:`r/${e}`:null}async getCommunityAchievementsData(){try{let t=(await e.G({operation:n.O.UserCommunityAchievements,variables:{username:this.username,subredditId:this.subredditId,imageMaxWidth:100}})).data?.redditorInfoByName;if(t?.__typename!==`Redditor`||!t.trophyCase){this.shouldRenderEntrypoint=!1;return}let r=[],i=t.trophyCase.trophiesBySubredditId||[];for(let e of i)(e.__typename===`AchievementImageTrophy`||e.__typename===`AchievementRepeatableImageTrophy`)&&r.push(e);this.achievements=r,this.unlockCount=t.trophyCase.trophiesBySubredditId?.length||0,this.totalTrophies=t.trophyCase.trophiesBySubredditId?.length||0}catch(e){window.Sentry?.captureError?.(e)}}async getAllAchievementsData(){try{if(!this.username){this.achievements=[];return}let t=(await e.G({operation:n.O.TrophyCategories,variables:{trophyImageMaxWidth:100,name:this.username,includeRepeatableAchievements:!0}})).data?.redditorInfoByName;if(t?.__typename!==`Redditor`)return;let r=t.trophyCase?.categories?.edges.map(e=>e?.node);if(!r)return;let i=[];for(let e of r)e&&e.__typename===`AchievementTrophyCategory`&&i.push(e);if(!i.length)return;this.achievements=this.getAchievements(i),this.setTrophyCounts(this.achievements)}catch(e){window.Sentry?.captureError?.(e)}}async connectedCallback(){super.connectedCallback(),this.subredditId=this.extractAttributeData(s.SUBREDDIT_ID_ATTRIBUTE)||``,this.subredditName=this.addSubredditPrefix(this.extractAttributeData(s.SUBREDDIT_NAME_ATTRIBUTE)||this.extractClassData(s.SUBREDDIT_NAME_CLASS))||``;let e=this.source===a.HOVERCARD||this.source===a.COMMUNITY,t=this.subredditId&&this.subredditName;if(e&&!t){this.shouldRenderEntrypoint=!1;return}this.loading=!0,this.subredditId&&e?await this.getCommunityAchievementsData():await this.getAllAchievementsData(),this.loading=!1}joinTemplates(e,t=i.x`, `,n=!1){let r=i.x``;for(let a=0;a<e.length;a++){let o=a===e.length-1&&!n?i.A:t;r=i.x`${r}${e[a](o)}`}return r}async handleAchievementClick(t,n,i=!1){let a=!!document.querySelector(`achievement-modal`);!this.isModalFeatureActivated&&!a&&(await this._activateFeature({name:e.el}),this.isModalFeatureActivated=!0),this.pubsub.publish(e.T.AchievementsModalShowById,{achievementId:t,username:n,isCurrentLoggedUser:i});let o=this.getPageTypeFromSource();e.d(this,r.n(o))}renderAchievementTitles(e){return i.x`
+      ${this.joinTemplates(this.getImageTrophies(e.achievements).slice(0,e.numOfAchievements).map(e=>t=>i.x`<div
+                data-testid="achievement-entrypoint-title"
+                class="text-12 font-normal text-neutral-content no-underline cursor-pointer"
+                @click="${()=>{this.handleAchievementClick(e.id,this.username,this.source===a.PROFILE)}}"
+                @keydown="${t=>{(t.key===` `||t.key===`Enter`)&&this.handleAchievementClick(e.id,this.username,this.source===a.PROFILE)}}"
+              >
+                <span class="achievement-flair-title">${e.name}${t}</span>
+              </div>`),i.x`${e.separator}`,e.numOfUnlockedAchievements>3)}
+    `}renderMoreLink(e){return i.x`
+      <div
+        class="text-12 font-normal text-neutral-content no-underline cursor-pointer"
+        @click="${()=>this.handleViewLinkClick(`/user/${e.username}/achievements/`,!0)}"
+        @keydown="${t=>{(t.key===` `||t.key===`Enter`)&&this.handleViewLinkClick(`/user/${e.username}/achievements/`,!0)}}"
+        data-testid="more-achievements"
+      >
+        <span class="achievement-flair-title"
+          >${`+ nog${e.numOfUnlockedAchievements-e.numOfAchievements}`}</span
+        >
+      </div>
+    `}renderTitlesSection(e){if(!e.numOfUnlockedAchievements)return i.x`<div
+        class="flex flex-row flex-wrap items-center text-12 font-normal text-neutral-content"
+      >
+        ${`Geen ontgrendeld`}
+      </div>`;let t=this.renderAchievementTitles(e),n;return n=e.numOfUnlockedAchievements>3?i.x`${t}${this.renderMoreLink(e)}`:i.x`${t}`,i.x`<div class="flex flex-row flex-wrap items-center" style="line-height: 1rem;">
+      ${n}
+    </div>`}getImageTrophies(e){let t=[];for(let n of e)(n.__typename===`AchievementImageTrophy`||n.__typename===`AchievementRepeatableImageTrophy`)&&t.push(n);return t}renderImagesSection(e){let t=this.getImageTrophies(e.achievements).slice(0,3).map((e,t)=>this.renderImage({name:e.name,imageUrl:e.gridImage.url,id:e.id,username:this.username,index:t,isUnlocked:!0})),n=t.length,r=this.source===a.PROFILE;if(n<3&&r){let e=3-n;for(let r=0;r<e;r++)t.push(this.renderImage({name:``,imageUrl:`https://preview.redd.it/l3ct2kzdo12d1.png?width=500&height=500&crop=smart&auto=webp&s=201ce96e4984d919ccb4e0483cbf6d3140b3a5c0`,id:``,username:this.username,index:r+n,isUnlocked:!1}))}return i.x`<div
+      class="flex flex-row ${t.length<2?`me-sm`:``} z-0"
+      style="max-width: 100px;"
+    >
+      ${t}
+    </div>`}renderImage(e){let t=getComputedStyle(this).direction===`rtl`,n=``;e.index>0&&(n=`transform: translateX(${t?``:`-`}${40*e.index}%);`);let r=-2*e.index;return i.x`
+      <div
+        @click="${t=>{if(!e.isUnlocked){t.preventDefault();return}this.handleAchievementClick(e.id,this.username,this.source===a.PROFILE)}}"
+        @keydown="${t=>{(t.key===` `||t.key===`Enter`)&&this.handleAchievementClick(e.id,this.username,this.source===a.PROFILE)}}"
+        class="${e.isUnlocked?`cursor-pointer`:``}"
+        data-testid="achievement-entrypoint-image-container"
+        style="${n}; z-index: ${r};"
+      >
+        <div
+          style="position: relative; width: ${40}px;
+          height: ${40}px; z-index: ${r};"
+          class="achievement-flair"
+        >
+          <img
+            class="absolute top-0 bottom-0 start-0 end-0"
+            alt="${e.name}"
+            style="z-index: ${r};"
+            src="${e.imageUrl}"
+            width="${40}"
+            height="${40}"
+          />
+
+          <div class="absolute top-0 bottom-0 start-0 end-0" style="z-index: ${r-1};">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="20" fill="var(--color-neutral-background)" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    `}getPageTypeFromSource(){return this.isInHovercard()?r.P.UserHovercard:this.isInProfile()||this.isInOtherUserProfile()?r.P.Profile:this.isInCommunity()?r.P.Community:r.P.Unknown}getWindow(){return window}publishViewAllAchievementsTracking(){let t=this.getPageTypeFromSource();e.d(this,r.v(t))}handleViewLinkClick(e=`/achievements`,t=!1){this.publishViewAllAchievementsTracking(),t?this.getWindow().open(e,`_blank`):this.getWindow().location.href=e}handleViewLinkKeyDown(e,t){(e.key===` `||e.key===`Enter`)&&(this.publishViewAllAchievementsTracking(),t.location.href=`/achievements`)}getViewAllHref(){return this.isInCommunity()?`/user/${this.username}/achievements/category/community/`:`/user/${this.username}/achievements`}renderActionBar(){return this.isInProfile()||this.isInCommunity()?i.x`
+        <div
+          class="flex flex-row 
+            justify-between w-full mt-xs ${this.isInProfile()?`mb-sm`:``} items-center"
+        >
+          <div class="flex flex-col text-12 font-normal text-neutral-content-weak items-center">
+            ${this.isInCommunity()&&!this.unlockCount?i.A:`${this.unlockCount} ontgrendeld`}
+          </div>
+          ${t.b({appearance:`secondary`,attributes:{className:`pointer-events-auto hover:underline`,onclick:()=>this.handleViewLinkClick(this.getViewAllHref(),!0),"data-testid":`achievements-view-link`,"aria-label":`Alle prestaties bekijken`},children:`Alles bekijken`,size:t._.Small})}
+        </div>
+      `:i.x`
+      <div
+        tabindex="0"
+        data-testid="achievements-view-link"
+        class="flex flex-row 
+          justify-between w-full mt-xs mb-md items-center"
+        @click="${()=>this.handleViewLinkClick()}"
+        @keydown="${e=>this.handleViewLinkKeyDown(e,window)}"
+      >
+        <span class="text-12 a no-visited hover:underline cursor-pointer">
+          ${`Je prestaties bekijken`}
+        </span>
+      </div>
+    `}isInHovercard(){return this.source===a.HOVERCARD}isInCommunity(){return this.source===a.COMMUNITY}isInProfile(){return this.source===a.PROFILE}isInOtherUserProfile(){return this.source===a.OTHER_USER_PROFILE}getTitle(){let e=``;return e=this.isInCommunity()?`communityprestaties`:this.isInHovercard()?`Prestaties in ${this.subredditName}`:`prestaties`,i.x`
+      <div
+        class="achievements-entrypoint-title
+            flex flex-row w-full items-start mb-xs ${this.isInHovercard()?``:`uppercase`}
+            text-12 font-semibold ${this.isInHovercard()?`text-neutral-content`:`text-neutral-content-weak`}"
+      >
+        ${e}
+      </div>
+    `}renderEntrypoint(){if(!this.shouldRenderEntrypoint||this.loading||!this.unlockCount)return i.A;let e={achievements:this.achievements,username:this.username,numOfAchievements:this.unlockCount<3?this.unlockCount:3,numOfUnlockedAchievements:this.unlockCount,separator:o};return i.x`
+      <hr class="border-0 border-b-sm border-solid border-neutral-border-weak w-full" />
+      ${this.getTitle()}
+      <faceplate-tracker
+        source="achievements"
+        action="view"
+        noun="right_rail"
+        class="achievements-entrypoint flex flex-col w-full items-center"
+      >
+        <div class="achievement-profile-flairs flex flex-row w-full">
+          ${this.renderImagesSection(e)}
+          ${this.username?this.renderTitlesSection(e):i.A}
+        </div>
+        ${this.renderActionBar()}
+      </faceplate-tracker>
+      ${this.isInHovercard()?i.x`<hr class="border-0 border-b-sm border-solid border-neutral-border-weak w-full" />`:i.A}
+    `}render(){return this.isInCommunity()?i.x`<div class="flex flex-col w-full px-md box-border">
+        ${this.renderEntrypoint()}
+      </div>`:this.renderEntrypoint()}};return c.styles=[i.i`
+      .achievement-flair:hover {
+        transform: translateY(-10%);
+        transition: all 0.5s ease;
+      }
+      .achievement-flair-title:hover {
+        text-decoration: underline;
+      }
+      .achievement-profile-entrypoint {
+        pointer-events: auto !important;
+      }
+    `,e.t],e._([e.n({type:String,attribute:`username`})],c.prototype,`username`,void 0),e._([e.n({type:String,attribute:`source`})],c.prototype,`source`,void 0),e._([e.f()],c.prototype,`achievements`,void 0),e._([e.f()],c.prototype,`unlockCount`,void 0),e._([e.f()],c.prototype,`totalTrophies`,void 0),e._([e.f()],c.prototype,`shouldRenderEntrypoint`,void 0),e._([e.f()],c.prototype,`loading`,void 0),e._([e.f()],c.prototype,`subredditId`,void 0),e._([e.f()],c.prototype,`subredditName`,void 0),e._([e.f()],c.prototype,`isModalFeatureActivated`,void 0),c=e._([e.e(`achievements-entrypoint`)],c),Object.defineProperty({get AchievementsEntrypoint(){return c},CSS_SELECTORS:s},Symbol.toStringTag,{value:`Module`})});
+
+/* @sml-chunk */
+SML.di(`./UMExCS6_2k.js`,import.meta.url,`UMExCS6_2k`),SML.di(`./C7C5MjAIvC.js`,import.meta.url,`C7C5MjAIvC`),SML.di(`./sJbjZWJVxt.js`,import.meta.url,`sJbjZWJVxt`),SML.di(`./BBBMQM27jC.js`,import.meta.url,`BBBMQM27jC`),SML.dm(`D9EUQsm-Kg`,[`UMExCS6_2k`,`C7C5MjAIvC`,`sJbjZWJVxt`,`BBBMQM27jC`],async(e,t,n,r)=>{var i=t.i`${n.m}:host{display:flex;overflow:hidden;background-color:var(--color-secondary-background);width:100%}:host(:dir(rtl)){transform:scaleX(-1)}:host([size=small]){height:var(--size-2xs);border-radius:2px}:host([size=medium]){height:var(--size-xs);border-radius:2px}:host::after{content:'';display:block;width:100%;border-start-end-radius:0;border-end-end-radius:0;transform:translateX(calc(1% * (var(--progress-value) - 100)));transition:transform 350ms ease}:host([appearance=brand])::after{background-color:var(--color-brand-background)}:host([appearance=primary])::after{background-color:var(--color-primary-background)}`;let a={Primary:`primary`},o={Medium:`medium`};class s extends r.R{constructor(){super(...arguments),this.appearance=a.Primary,this.size=o.Medium,this.value=0}connectedCallback(){super.connectedCallback(),this.setAttribute(`role`,`progressbar`),this.setAttribute(`aria-valuemin`,`0`),this.setAttribute(`aria-valuemax`,`100`)}render(){let e=Math.min(Math.max(this.value,0),100).toString();return this.style.setProperty(`--progress-value`,e),this.setAttribute(`aria-valuenow`,e),t.A}}e._([e.n({type:String,reflect:!0})],s.prototype,`appearance`,void 0),e._([e.n({type:String,reflect:!0})],s.prototype,`size`,void 0),e._([e.n({type:Number})],s.prototype,`value`,void 0);let c=class extends s{};return c.styles=i,c=e._([e.e(`rpl-progress-indicator`)],c),Object.defineProperty({get RPLProgressIndicator(){return c},RPLProgressIndicatorAppearance:a,RPLProgressIndicatorSize:o},Symbol.toStringTag,{value:`Module`})});
